@@ -14,14 +14,14 @@ import ru.sergeyrozhkov.springboot_312.service.UserServiceImp;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserServiceImp userService;
-    private final SuccessLoginHandler successLoginHandler;
+    private final UserServiceImp userServiceImp;
     private final UserDetailsService userDetailsService;
+    private final SuccessLoginHandler successLoginHandler;
 
     @Autowired
-    public SecurityConfig(UserServiceImp userService, SuccessLoginHandler successLoginHandler, UserDetailsService userDetailsService) {
+    public SecurityConfig(UserServiceImp userServiceImp, SuccessLoginHandler successLoginHandler, UserDetailsService userDetailsService) {
         this.successLoginHandler = successLoginHandler;
-        this.userService = userService;
+        this.userServiceImp = userServiceImp;
         this.userDetailsService = userDetailsService;
     }
 
@@ -29,16 +29,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .formLogin()
-                .usernameParameter("email");
-        http
+                .usernameParameter("email")
+                .successHandler(successLoginHandler)
+                .and()
                 .authorizeRequests()
                 .antMatchers("/").hasRole("ADMIN");
+
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); // так работает
-        auth.userDetailsService(userService).passwordEncoder(passwordEncoder()); // и так работает
+        auth.userDetailsService(userServiceImp).passwordEncoder(passwordEncoder()); // и так работает
     }
 
     @Bean
