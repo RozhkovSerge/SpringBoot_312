@@ -11,7 +11,7 @@ import ru.sergeyrozhkov.springboot_312.repository.UserRepository;
 import java.util.List;
 
 @Service
-public class UserServiceImp implements UserService, UserDetailsService {
+public class UserServiceImp implements UserService {
 
     private final UserRepository userRepository;
 
