@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+  <button type="button" class="btn-close"
+          data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+  <form th:method="post" th:action="@{/admin/delete}" th:object="${user}">
+    <div class="form-row centered">
+      <input type="hidden" th:field="*{id}"/>
+
+      <div class="m-3 centered mt-0">
+
+        <div class="form-group row col-12 justify-content-center">
+          <label class="col-form-label text-center"><b>ID:</b></label>
+          <div class="col-7">
+            <input type="text"
+                   th:value="${user.id}"
+                   class="form-control col-6" disabled/>
+          </div>
+        </div>
+
+        <div class="form-group row col-12 justify-content-center">
+          <label class="text-center col-form-label"><b>First Name:</b></label>
+          <div class="col-7">
+            <input type="text"
+                   th:field="*{firstname}"
+                   class="form-control col-6"
+                   minlength="2"
+                   maxlength="20"
+                   disabled/>
+          </div>
+        </div>
+
+        <div class="form-group row col-12 justify-content-center">
+          <label class="text-center col-form-label"><b>Last
+            Name:</b> </label>
+          <div class="col-7">
+            <input type="text"
+                   th:field="*{lastname}"
+                   class="form-control col-6"
+                   minlength="2"
+                   maxlength="20"
+                   disabled/>
+          </div>
+        </div>
+
+        <div class="form-group row col-12 justify-content-center">
+          <label class=" text-center col-form-label"><b>Age:</b></label>
+          <div class="col-7">
+            <input type="number"
+                   th:field="*{age}"
+                   class="form-control col-6"
+                   minlength="1" maxlength="3"
+                   disabled/>
+          </div>
+        </div>
+
+        <div class="form-group row col-12 justify-content-center">
+          <label class="text-center col-form-label"><b>E-mail:</b></label>
+          <div class="col-7">
+            <input type="email"
+                   th:field="*{email}"
+                   class="form-control"
+                   disabled/>
+          </div>
+        </div>
+
+        <div class="form-group row col-12 justify-content-center">
+          <label class=" text-center col-form-label"><b>Password:</b></label>
+          <div class="col-7">
+            <input type="password"
+                   th:field="*{password}"
+                   class="form-control"
+                   minlength="3" maxlength="10"
+                   disabled/>
+          </div>
+        </div>
+
+        <div class="form-group row col-12 justify-content-center">
+          <label class="text-center col-form-label"><b>Role:</b></label>
+          <div class="col-7">
+            <select class="form-control" name="roles" multiple
+                    size="2">
+              <option th:each="role: ${listRoles}"
+                      th:field="*{roles}"
+                      th:text="${#strings.substringAfter(role.name, 'ROLE_')}"
+                      th:value="${role.id}">
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary"
+              data-bs-dismiss="modal">Close
+      </button>
+      <button type="submit" class="btn btn-danger">Delete
+      </button>
+    </div>
+  </form>
+</div>
+</div>
+</html>

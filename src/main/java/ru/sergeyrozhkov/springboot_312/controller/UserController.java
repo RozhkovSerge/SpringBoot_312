@@ -50,11 +50,25 @@ public class UserController {
         return "redirect:/admin";
     }
 
+    @PostMapping("/admin/delete")
+    public String deleteUser(User user) {
+        userService.delete(user);
+
+        return "redirect:/admin";
+    }
+
     @GetMapping("/admin/{id}/edit")
     public String editUser(@PathVariable Long id, Model model) {
         model.addAttribute("user", userService.findUserById(id));
         model.addAttribute("listRoles", roleService.findAll());
         return "edit";
+    }
+
+    @GetMapping("/admin/{id}/delete")
+    public String deleteUser(@PathVariable Long id, Model model) {
+        model.addAttribute("user", userService.findUserById(id));
+        model.addAttribute("listRoles", roleService.findAll());
+        return "delete";
     }
 
     @GetMapping("/user")

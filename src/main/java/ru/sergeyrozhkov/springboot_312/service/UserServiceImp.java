@@ -48,6 +48,11 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public void delete(User user) {
+        userRepository.delete(user);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findUserByEmail(email);
         if(user == null) {
