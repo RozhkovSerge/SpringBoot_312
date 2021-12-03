@@ -35,9 +35,9 @@ public class PopulateDB {
         user.getRoles().add(roleAdmin);
 
         User admin = new User();
-        admin.setFirstname("Peter");
+        admin.setFirstname("Ivan");
         admin.setLastname("Parkinson");
-        admin.setEmail("peter@mail.com");
+        admin.setEmail("ivan@mail.com");
         admin.setAge(30);
         admin.setPassword("$2a$12$q98.zeMhcdtMh6.EIN/1eO9eJ5RbeU8G1Zl2Bo5zDMUulqYGjH3Pa");
         admin.getRoles().add(roleUser);

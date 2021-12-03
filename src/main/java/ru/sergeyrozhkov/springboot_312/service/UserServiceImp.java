@@ -21,9 +21,15 @@ public class UserServiceImp implements UserService, UserDetailsService {
     }
 
     @Override
-    public List<User> getAll() {
+    public List<User> findAll() {
         return userRepository.findAll();
     }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
