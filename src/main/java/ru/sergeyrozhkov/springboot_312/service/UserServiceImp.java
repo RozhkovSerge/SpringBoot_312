@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.sergeyrozhkov.springboot_312.model.User;
 import ru.sergeyrozhkov.springboot_312.repository.UserRepository;
@@ -30,6 +32,20 @@ public class UserServiceImp implements UserService {
         return userRepository.findUserByEmail(email);
     }
 
+    @Override
+    public User findUserById(Long id) {
+        return userRepository.findUserById(id);
+    }
+
+    @Override
+    public void save(User user) {
+        if(user.getPassword().equals("")) {
+            user.setPassword(userRepository.findUserByEmail(user.getEmail()).getPassword());
+        };
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
+        userRepository.save(user);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

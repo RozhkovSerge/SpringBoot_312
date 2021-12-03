@@ -14,14 +14,6 @@
             integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f"
             crossorigin="anonymous"></script>
     <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
         .bg-yellow {
             background-color: #FEF0B0;
         }
@@ -34,12 +26,6 @@
         .bg-blue:hover {
             background-color: #59AD9F;
             color: white;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
         }
     </style>
 </head>
@@ -122,7 +108,7 @@
                                     </td>
                                     <td>
                                         <a class="btn bg-blue editUser ps-4 pe-4"
-                                           th:href="@{/admin/edit/{id}(id=${user.id})}">Edit</a>
+                                           th:href="@{/admin/{id}/edit(id=${user.id})}">Edit</a>
                                     </td>
                                     <td>
                                         <a class="btn btn-danger deleteUser"
@@ -242,6 +228,22 @@
         </main>
     </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script>
+    $(document).ready(
+        function () {
+            $(".editUser").on("click", function (e) {
+                e.preventDefault();
+                $('#userModal').modal('show').find('.modal-content').load($(this).attr("href"));
+            });
+            $(".deleteUser").on("click", function (e) {
+                e.preventDefault();
+                $('#userModal').modal('show').find('.modal-content').load($(this).attr("href"));
+            });
+        }
+    );
+</script>
 </body>
 </html>

@@ -5,6 +5,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import ru.sergeyrozhkov.springboot_312.model.User;
 import ru.sergeyrozhkov.springboot_312.service.RoleService;
 import ru.sergeyrozhkov.springboot_312.service.UserService;
@@ -34,10 +36,25 @@ public class UserController {
         model.addAttribute("roles", roles);
         model.addAttribute("emptyUser", new User());
         model.addAttribute("principal", loggedUser);
-        model.addAttribute("listUsers", userService.findAll()); // поменять на listUsers
+        model.addAttribute("listUsers", userService.findAll());
         model.addAttribute("listRoles", roleService.findAll());
 
         return "admin";
+    }
+
+    @PostMapping("/admin/save")
+    public String saveUser(User user) {
+
+        userService.save(user);
+
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/admin/{id}/edit")
+    public String editUser(@PathVariable Long id, Model model) {
+        model.addAttribute("user", userService.findUserById(id));
+        model.addAttribute("listRoles", roleService.findAll());
+        return "edit";
     }
 
     @GetMapping("/user")
