@@ -1,5 +1,6 @@
 package ru.sergeyrozhkov.springboot_312.controller;
 
+import org.hibernate.NonUniqueResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -44,8 +45,11 @@ public class UserController {
 
     @PostMapping("/admin/save")
     public String saveUser(User user) {
-
-        userService.save(user);
+        try {
+            userService.save(user);
+        } catch (NonUniqueResultException ignored) {
+            ignored.printStackTrace();
+        }
 
         return "redirect:/admin";
     }

@@ -30,8 +30,6 @@
             <input type="text"
                    th:field="*{firstname}"
                    class="form-control col-6"
-                   minlength="2"
-                   maxlength="20"
                    disabled/>
           </div>
         </div>
@@ -43,8 +41,6 @@
             <input type="text"
                    th:field="*{lastname}"
                    class="form-control col-6"
-                   minlength="2"
-                   maxlength="20"
                    disabled/>
           </div>
         </div>
@@ -55,7 +51,6 @@
             <input type="number"
                    th:field="*{age}"
                    class="form-control col-6"
-                   minlength="1" maxlength="3"
                    disabled/>
           </div>
         </div>
@@ -76,7 +71,6 @@
             <input type="password"
                    th:field="*{password}"
                    class="form-control"
-                   minlength="3" maxlength="10"
                    disabled/>
           </div>
         </div>
@@ -89,7 +83,7 @@
               <option th:each="role: ${listRoles}"
                       th:field="*{roles}"
                       th:text="${#strings.substringAfter(role.name, 'ROLE_')}"
-                      th:value="${role.id}">
+                      th:value="${role.id}" disabled>
               </option>
             </select>
           </div>

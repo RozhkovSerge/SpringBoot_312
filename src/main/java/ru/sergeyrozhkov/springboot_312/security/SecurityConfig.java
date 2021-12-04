@@ -30,7 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(successLoginHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/").hasRole("ADMIN");
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/**").authenticated();
     }
 
     @Override
