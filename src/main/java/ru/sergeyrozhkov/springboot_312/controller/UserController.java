@@ -1,6 +1,5 @@
 package ru.sergeyrozhkov.springboot_312.controller;
 
-import org.hibernate.NonUniqueResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -45,11 +44,7 @@ public class UserController {
 
     @PostMapping("/admin/save")
     public String saveUser(User user) {
-        try {
-            userService.save(user);
-        } catch (NonUniqueResultException ignored) {
-            ignored.printStackTrace();
-        }
+        userService.save(user);
 
         return "redirect:/admin";
     }
@@ -65,6 +60,7 @@ public class UserController {
     public String editUser(@PathVariable Long id, Model model) {
         model.addAttribute("user", userService.findUserById(id));
         model.addAttribute("listRoles", roleService.findAll());
+
         return "edit";
     }
 
@@ -72,12 +68,14 @@ public class UserController {
     public String deleteUser(@PathVariable Long id, Model model) {
         model.addAttribute("user", userService.findUserById(id));
         model.addAttribute("listRoles", roleService.findAll());
+
         return "delete";
     }
 
     @GetMapping("/user")
     public String userPage(Model model, Principal principal) {
         model.addAttribute("principal", userService.findUserByEmail(principal.getName()));
+
         return "user";
     }
 }

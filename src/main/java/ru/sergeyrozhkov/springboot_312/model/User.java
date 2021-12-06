@@ -36,7 +36,7 @@ public class User implements UserDetails {
     private String password;
 
     @Column(name = "age")
-    private int age;
+    private Byte age;
 
     @ManyToMany
     @JoinTable(

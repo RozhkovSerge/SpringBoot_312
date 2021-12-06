@@ -32,8 +32,8 @@ public class PopulateDB {
         admin.setFirstname("Bob");
         admin.setLastname("Johnson");
         admin.setEmail("bob@mail.com");
-        admin.setAge(25);
-        admin.setPassword("$2a$12$q98.zeMhcdtMh6.EIN/1eO9eJ5RbeU8G1Zl2Bo5zDMUulqYGjH3Pa");
+        admin.setAge((byte) 25);
+        admin.setPassword("$2a$12$q98.zeMhcdtMh6.EIN/1eO9eJ5RbeU8G1Zl2Bo5zDMUulqYGjH3Pa"); //100
         admin.getRoles().add(roleAdmin);
         userRepository.save(admin);
         admin.getRoles().add(roleUser);
@@ -43,8 +43,8 @@ public class PopulateDB {
         user.setFirstname("Ivan");
         user.setLastname("Petrov");
         user.setEmail("ivan@mail.com");
-        user.setAge(30);
-        user.setPassword("$2a$12$q98.zeMhcdtMh6.EIN/1eO9eJ5RbeU8G1Zl2Bo5zDMUulqYGjH3Pa");
+        user.setAge((byte) 30);
+        user.setPassword("$2a$12$q98.zeMhcdtMh6.EIN/1eO9eJ5RbeU8G1Zl2Bo5zDMUulqYGjH3Pa"); //100
         user.getRoles().add(roleUser);
         userRepository.save(user);
     }
